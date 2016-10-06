@@ -1,0 +1,14 @@
+#cards   (card-id:user-id (empty if none):opening-credit)
+x1:lc:50
+x2::45
+x3:lc:0
+#users   (user-id:nam:email:card-ids (may be multiple,empty if none):optional type (may be empty)
+lc:Lawrence:lcavedon@rmit.edu.au:x1,x3:senior
+ct:Charles:charles@rmit.edu.au::
+#prices
+2Hour:Zone1:3.50
+2Hour:Zone12:5.00
+AllDay:Zone1:6.90
+AllDay:Zone12:9.80
+#stations
+Central,1:Flagstaff,1:Richmond,1:Lilydale,2:Epping,2:Lviv,1:Lviv,2

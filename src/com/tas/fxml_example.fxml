@@ -9,53 +9,71 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.layout.HBox?>
 
 <GridPane fx:controller="com.tas.FXMLExampleController"
-	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+	styleClass="root">
 	<padding>
-		<Insets top="-250" right="5" bottom="5" left="5" />		
+		<Insets top="-100" right="5" bottom="5" left="5" />
 	</padding>
-		
+
 
 	<Label text="From" GridPane.columnIndex="0" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
 
 	<ListView id="from" GridPane.rowIndex="1" prefHeight="60" />
-	
+
 	<Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
-		
-	<ListView id="to" GridPane.rowIndex="1" GridPane.columnIndex="1" prefHeight="60" />	
+
+	<ListView id="to" GridPane.rowIndex="1" GridPane.columnIndex="1"
+		prefHeight="60" />
 
 	<Label text="Card" GridPane.columnIndex="2" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
-		
-	<ListView id="card" GridPane.rowIndex="1" GridPane.columnIndex="2" prefHeight="60" />
-	
-	
-	<VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0" prefHeight="90" GridPane.rowSpan="2">
+
+	<ListView id="card" GridPane.rowIndex="1"
+		GridPane.columnIndex="2" prefHeight="60" />
+
+
+	<VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3"
+		GridPane.rowIndex="0" prefHeight="90" GridPane.rowSpan="2">
 		<Label text="Pass Length" />
-		
+
 		<ListView id="passLength" prefHeight="60" />
-		
+
 		<Label text="Pass Type" />
-		
+
 		<ListView id="passType" prefHeight="60" />
 
 	</VBox>
-	
-	
-	<HBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3" alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
+
+
+	<HBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3"
+		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
 		<Label text="Day" />
-	
+
 		<ListView id="day" prefHeight="25" prefWidth="70" />
 	</HBox>
 
 
-	<HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3" alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
+	<HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3"
+		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
 		<Label text="Start" />
-	
+
 		<ListView id="start" prefHeight="25" prefWidth="70" editable="true" />
+	</HBox>
+	
+
+	<HBox spacing="15" GridPane.rowIndex="5" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
+		<Button id="quit" text="QUIT" onAction="#quit" />
+		<Button id="save" text="SAVE" />		
+		<Button id="manage" text="MANAGE CARDS/USERS" onAction="#openManageUserWindow" />
+		<Button id="printReports" text="PRINT REPORTS" />		
 	</HBox>
 
 </GridPane>
