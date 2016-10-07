@@ -13,31 +13,32 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextArea?>
 
 <GridPane fx:controller="com.tas.FXMLExampleController"
 	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
 	styleClass="root">
 	<padding>
-		<Insets top="-100" right="5" bottom="5" left="5" />
+		<Insets top="-20" right="5" bottom="5" left="5" />
 	</padding>
 
 
 	<Label text="From" GridPane.columnIndex="0" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
 
-	<ListView id="from" GridPane.rowIndex="1" prefHeight="60" />
+	<ListView id="from" GridPane.rowIndex="1" prefHeight="60" fx:id="from" />
 
 	<Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
 
 	<ListView id="to" GridPane.rowIndex="1" GridPane.columnIndex="1"
-		prefHeight="60" />
+		prefHeight="60" fx:id="to" />
 
 	<Label text="Card" GridPane.columnIndex="2" GridPane.rowIndex="0"
 		GridPane.columnSpan="1" />
 
 	<ListView id="card" GridPane.rowIndex="1"
-		GridPane.columnIndex="2" prefHeight="60" />
+		GridPane.columnIndex="2" prefHeight="60" fx:id="card" />
 
 
 	<VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3"
@@ -57,7 +58,7 @@
 		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
 		<Label text="Day" />
 
-		<ListView id="day" prefHeight="25" prefWidth="70" />
+		<ListView id="day" prefHeight="25" prefWidth="70" fx:id="day" />
 	</HBox>
 
 
@@ -65,11 +66,17 @@
 		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
 		<Label text="Start" />
 
-		<ListView id="start" prefHeight="25" prefWidth="70" editable="true" />
+		<ListView id="start" prefHeight="25" prefWidth="70" editable="true" fx:id="start" />
 	</HBox>
 	
-
+	
 	<HBox spacing="15" GridPane.rowIndex="5" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
+		<Button id="addJourney" text="Add Journey" onAction="#addJourney" />
+		<TextArea id="journey" fx:id="journey" prefWidth="350" prefHeight="50" editable="false" />
+		<Button id="buyPass" text="Buy Pass" />
+	</HBox>
+
+	<HBox spacing="15" GridPane.rowIndex="6" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
 		<Button id="quit" text="QUIT" onAction="#quit" />
 		<Button id="save" text="SAVE" />		
 		<Button id="manage" text="MANAGE CARDS/USERS" onAction="#openManageUserWindow" />

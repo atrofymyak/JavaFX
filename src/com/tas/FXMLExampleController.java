@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -32,6 +33,12 @@ public class FXMLExampleController {
 	@FXML private TextField userMail;
 	@FXML private ListView<String> userCard;
 	@FXML private TextField addedUser;
+	@FXML private TextArea journey;
+	@FXML private ListView<String> from;
+	@FXML private ListView<String> to;
+	@FXML private ListView<String> card;
+	@FXML private ListView<String> day;
+	@FXML private ListView<String> start;
 
 	@FXML
 	@SuppressWarnings("unchecked")
@@ -97,6 +104,13 @@ public class FXMLExampleController {
 	}
 	
 	@FXML
+	protected void addJourney(ActionEvent event) throws Exception {
+		String journeyText = "Added journey from " + from.getSelectionModel().getSelectedItem() + " to " + to.getSelectionModel().getSelectedItem() + " on " + day.getSelectionModel().getSelectedItem() + " at " + start.getSelectionModel().getSelectedItem();
+		
+		journey.setText(journeyText);
+	}
+	
+	@FXML
 	protected void createUser(ActionEvent event) throws Exception {
 		User user = new User();
 		user.setUserId(userId.getText());
@@ -140,4 +154,5 @@ public class FXMLExampleController {
 		newCredit.setText("");
 	}
 }
+
 
