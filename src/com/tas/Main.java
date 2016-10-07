@@ -114,7 +114,7 @@ public class Main extends Application {
 		@SuppressWarnings("unchecked")
 		ListView<String> startListView = (ListView<String>) scene.lookup(StringConstants.START);
 		List<String> startItems = new ArrayList<String>();
-		startItems.add("9:00");
+		startItems.add("0:00");
 		startListView.setEditable(true);
 		startListView.setItems(new ObservableListWrapper<String>(startItems));
 
