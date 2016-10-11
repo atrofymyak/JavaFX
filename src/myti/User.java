@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import constants.StringConstants;
+
 /**
  * Created by Prashant on 06/09/16.
  */
@@ -217,7 +219,23 @@ public class User {
 		this.cards = cards;
 	}
 
-    
+	public String toString(){
+		String result = this.getUserId() + StringConstants.COLON + this.getName() + StringConstants.COLON + this.getEmail();
+		
+		result += StringConstants.COLON;
+		if(!this.getCards().isEmpty()){
+			for(int i = 0; i< this.getCards().size(); i++){
+				result += this.getCards().get(i);
+				
+				if(i< (this.getCards().size() - 1)){
+					result += StringConstants.COMMA;
+				}
+			}
+		}
+		result += StringConstants.COLON;
+		
+		return result;
+	}
     
 }
 

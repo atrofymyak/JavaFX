@@ -1,6 +1,9 @@
 package myti;
+
 import java.sql.Time;
 import java.time.LocalTime;
+
+import constants.StringConstants;
 
 
 /**
@@ -184,6 +187,10 @@ public class MyTiPass {
 		this.startTime = startTime;
 	}
     
-    
+	public String toString(){
+		String result = this.getLength() + StringConstants.COLON + this.getZone() + StringConstants.COLON + this.getPrice();
+		
+		return result;
+	}
 
 }

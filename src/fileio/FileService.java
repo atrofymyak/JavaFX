@@ -3,6 +3,7 @@ package fileio;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ import myti.User;
 public class FileService {
 
 	private DBService dbService;
+	
+	private static File writeFile;
 
 	private FileService() {
 		dbService = DBService.getInstance();
@@ -125,6 +128,44 @@ public class FileService {
 		
 		dbService.addUser(user);
 	}
+	
+	public void writeToFile() throws Exception{
+		FileWriter fw = new FileWriter(getWriteFile());
+		
+		fw.write("#cards   (card-id:user-id (empty if none):opening-credit)\r\n");
+		fw.flush();
+		
+		for(MyTiCard card : dbService.getCards()){
+			fw.write(card.toString() + "\r\n");
+			fw.flush();
+		}
+		
+		fw.write("#users   (user-id:nam:email:card-ids (may be multiple,empty if none):optional type (may be empty)\r\n");		
+		for(User user : dbService.getUsers()){
+			fw.write(user.toString() + "\r\n");
+			fw.flush();
+		}
+		
+		fw.write("#prices\r\n");
+		fw.flush();
+		for(MyTiPass pass : dbService.getPasses()){
+			fw.write(pass.toString() + "\r\n");
+			fw.flush();
+		}
+		
+		fw.write("#stations\r\n");
+		fw.flush();
+		String st = "";
+		for(Station station : dbService.getStations()){
+			st += station.toString() + StringConstants.COLON;			
+		}
+		
+		st = st.substring(0, st.length() - 1);		
+		fw.write(st);
+		fw.flush();
+		
+		fw.close();
+	}
 
 	private void populateCards(String line) {
 		String[] tokens = line.split(StringConstants.COLON);
@@ -135,6 +176,24 @@ public class FileService {
 		card.setCredit(Double.valueOf(tokens[2]));
 		
 		dbService.addCard(card);
+	}
+
+	public DBService getDbService() {
+		return dbService;
+	}
+
+	public void setDbService(DBService dbService) {
+		this.dbService = dbService;
+	}
+
+	public File getWriteFile() {
+		return writeFile;
+	}
+
+	public void setWriteFile(File writeFile) {
+		this.writeFile = writeFile;
 	}	
+
+	
 	
 }

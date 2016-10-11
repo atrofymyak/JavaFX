@@ -1,4 +1,4 @@
-package com.tas;
+package gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import com.sun.javafx.collections.ObservableListWrapper;
 
 import constants.StringConstants;
 import db.DBService;
+import fileio.FileService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,7 +26,9 @@ import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import myti.Journey;
 import myti.MyTiCard;
+import myti.MyTiPass;
 import myti.User;
 import validation.ValidationService;
 
@@ -61,7 +64,15 @@ public class FXMLExampleController {
 	@FXML
 	private ListView<String> day;
 	@FXML
-	private ListView<String> start;
+	private ListView<String> start;	
+	@FXML
+	private ListView<String> passLength;
+	@FXML
+	private ListView<String> passType;
+	@FXML
+	private ListView<String> userCreditCard;
+	@FXML
+	private ListView<String> journeys;
 
 	@FXML
 	@SuppressWarnings("unchecked")
@@ -124,9 +135,63 @@ public class FXMLExampleController {
 	protected void quit(ActionEvent event) throws Exception {
 		System.exit(0);
 	}
+	
+	@FXML
+	protected void buyPass(ActionEvent event) throws Exception {
+		String error = ValidationService.validateJourney(from.getSelectionModel().getSelectedItem(), to.getSelectionModel().getSelectedItem(), day.getSelectionModel().getSelectedItem(), start.getSelectionModel().getSelectedItem());
+		if(error.isEmpty()){
+			error = ValidationService.validateBuyPass(userCreditCard.getSelectionModel().getSelectedItem(), passLength.getSelectionModel().getSelectedItem(), passType.getSelectionModel().getSelectedItem());
+		}
+		
+		if(!error.isEmpty()){
+			popupErrorMsg(error);
+			return;
+		}
+		
+		String userCredit = userCreditCard.getSelectionModel().getSelectedItem();
+		String passLen = passLength.getSelectionModel().getSelectedItem();
+		String passT = passType.getSelectionModel().getSelectedItem();
+		
+		List<MyTiCard> cards = dbService.getCards();
+		String[] userCredits = userCredit.split(" - ");
+		
+		Double creditValue = 0.0;
+		for(MyTiCard card : cards){
+			if(card.getCardId().equals(userCredits[0])){
+				creditValue = card.getCredit();
+			}
+		}
+		
+		Double price = 0.0;
+		for(MyTiPass pass : dbService.getPasses()){
+			if(pass.getLength().equals(passLen) && pass.getZone().equals(passT)){
+				price = pass.getPrice();
+			}
+		}
+		
+		if(creditValue<price){
+			popupErrorMsg("Not enough money on card");
+			return;
+		}
+		
+		Journey journey = new Journey();
+		journey.setStartStation(from.getSelectionModel().getSelectedItem());
+		journey.setEndStation(to.getSelectionModel().getSelectedItem());
+		journey.setJourneyDay(day.getSelectionModel().getSelectedItem());
+		journey.setUpdatedLength(passLen);
+		journey.setUpdatedZone(passT);
+		journey.setJourneyStartTime(Double.parseDouble(start.getSelectionModel().getSelectedItem()));
+		
+		dbService.addJourney(journey);
+	}
 
 	@FXML
 	protected void addJourney(ActionEvent event) throws Exception {
+		String error = ValidationService.validateJourney(from.getSelectionModel().getSelectedItem(), to.getSelectionModel().getSelectedItem(), day.getSelectionModel().getSelectedItem(), start.getSelectionModel().getSelectedItem());
+		if(!error.isEmpty()){
+			popupErrorMsg(error);
+			return;
+		}
 		String journeyText = "Added journey from " + from.getSelectionModel().getSelectedItem() + " to "
 				+ to.getSelectionModel().getSelectedItem() + " on " + day.getSelectionModel().getSelectedItem() + " at "
 				+ start.getSelectionModel().getSelectedItem();
@@ -150,6 +215,31 @@ public class FXMLExampleController {
 			addedUser.setText("User " + user.getUserId() + ":" + user.getName() + " was added");
 
 			dbService.addUser(user);
+			MyTiCard card = new MyTiCard();
+			card.setUserId(user.getUserId());
+			card.setCardId(userCard.getSelectionModel().getSelectedItem());
+			
+			for(MyTiCard tiCard : dbService.getCards()){
+				if(tiCard.getCardId().equals(userCard.getSelectionModel().getSelectedItem())){
+					tiCard.setUserId(user.getUserId());
+					dbService.getCards().remove(tiCard);
+					dbService.addCard(tiCard);
+					List<String> cardItems = new ArrayList<String>();
+
+					List<MyTiCard> cards = dbService.getCards();
+					for (MyTiCard card1 : cards) {						
+						String cardInfo = card1.getCardId();
+
+						if (!card1.getUserId().isEmpty()) {
+							cardInfo += StringConstants.SPACE + StringConstants.MINUS + StringConstants.SPACE + card1.getUserId();
+						}
+						cardItems.add(cardInfo);						
+					}
+					manageCard.setItems(new ObservableListWrapper<String>(cardItems));
+					return;
+				}
+			}
+			
 		} else {
 			popupErrorMsg(error);
 		}
@@ -211,4 +301,50 @@ public class FXMLExampleController {
 		myDialog.setScene(myDialogScene);
 		myDialog.show();
 	}
+	
+	@FXML
+	protected void displayJourney(ActionEvent event) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("journey.fxml"));
+
+		//
+		Stage stage = new Stage();
+		stage.setTitle("Manage Cars/Users");
+		Scene scene = new Scene(root, 750, 450);
+		stage.setScene(scene);
+		root.setStyle("-fx-background-color: #f0f7fc;");
+
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.show();
+	}
+	
+	@FXML
+	protected void showJourneyWindow(ActionEvent event) throws Exception {
+		Main main = new Main();
+		Stage stage = new Stage();
+		main.start(stage);
+	}
+	
+	@FXML
+	protected void displayJourneys(ActionEvent event) throws Exception {
+		List<String> data = new ArrayList<String>();
+		for(Journey journey : dbService.getJourneys()){
+			String record = StringConstants.EMPTY;
+			
+			record += "Journey start Date :" + journey.getJourneyDate() +
+            " Journey start Time :" + journey.getJourneyStartTime() + " " +
+            "Journey End Time :" + journey.getJourneyEndTime() + " " +
+            "Journey start Station :" + journey.getStartStation() + " " +
+            "Journey End Station: :" + journey.getEndStation() + " ";
+			
+			data.add(record);
+		}
+		
+		journeys.setItems(new ObservableListWrapper<String>(data));
+	}
+	
+	@FXML
+	protected void saveData(ActionEvent event) throws Exception {
+		FileService.getInstance().writeToFile();
+	}
 }
+

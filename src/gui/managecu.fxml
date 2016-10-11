@@ -18,7 +18,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane fx:controller="com.tas.FXMLExampleController"
+<GridPane fx:controller="gui.FXMLExampleController"
 	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
 	styleClass="root">
 	<padding>
@@ -60,9 +60,9 @@
 	
 	<HBox spacing="15" GridPane.rowIndex="1" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
 		<Button id="quit" text="QUIT" onAction="#quit" />
-		<Button id="save" text="SAVE" />		
-		<Button id="manage" text="JOURNEYS/TRAVEL PASSES" />
-		<Button id="printReports" text="PRINT REPORTS" />		
+		<Button id="save" text="SAVE" onAction="#saveData" />				
+		<Button id="manage" text="JOURNEYS/TRAVEL PASSES" onAction="#showJourneyWindow" />
+		<Button id="printReports" text="PRINT REPORTS"  onAction="#displayJourney" />		
 	</HBox>		
 	
 </GridPane>

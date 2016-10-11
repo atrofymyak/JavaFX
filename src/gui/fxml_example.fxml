@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextArea?>
 
-<GridPane fx:controller="com.tas.FXMLExampleController"
+<GridPane fx:controller="gui.FXMLExampleController"
 	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
 	styleClass="root">
 	<padding>
@@ -38,18 +38,18 @@
 		GridPane.columnSpan="1" />
 
 	<ListView id="card" GridPane.rowIndex="1"
-		GridPane.columnIndex="2" prefHeight="60" fx:id="card" />
+		GridPane.columnIndex="2" prefHeight="60" fx:id="userCreditCard" />
 
 
 	<VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3"
 		GridPane.rowIndex="0" prefHeight="90" GridPane.rowSpan="2">
 		<Label text="Pass Length" />
 
-		<ListView id="passLength" prefHeight="60" />
+		<ListView id="passLength" prefHeight="60" fx:id="passLength" />
 
 		<Label text="Pass Type" />
 
-		<ListView id="passType" prefHeight="60" />
+		<ListView id="passType" prefHeight="60" fx:id="passType" />
 
 	</VBox>
 
@@ -73,14 +73,14 @@
 	<HBox spacing="15" GridPane.rowIndex="5" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
 		<Button id="addJourney" text="Add Journey" onAction="#addJourney" />
 		<TextArea id="journey" fx:id="journey" prefWidth="350" prefHeight="50" editable="false" />
-		<Button id="buyPass" text="Buy Pass" />
+		<Button id="buyPass" text="Buy Pass" onAction="#buyPass" />
 	</HBox>
 
 	<HBox spacing="15" GridPane.rowIndex="6" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
 		<Button id="quit" text="QUIT" onAction="#quit" />
-		<Button id="save" text="SAVE" />		
+		<Button id="save" text="SAVE" onAction="#saveData" />		
 		<Button id="manage" text="MANAGE CARDS/USERS" onAction="#openManageUserWindow" />
-		<Button id="printReports" text="PRINT REPORTS" />		
+		<Button id="printReports" text="PRINT REPORTS" onAction="#displayJourney" />		
 	</HBox>
 
 </GridPane>

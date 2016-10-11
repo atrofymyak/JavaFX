@@ -651,6 +651,39 @@ public class Journey {
     private void clearBuffer () {
         keyboard = new Scanner(System.in);
     }
+
+	public String getJourneyDay() {
+		return journeyDay;
+	}
+
+	public void setJourneyDay(String journeyDay) {
+		this.journeyDay = journeyDay;
+	}
+
+	public void setJourneyStartTime(double journeyStartTime) {
+		this.journeyStartTime = journeyStartTime;
+	}
+
+	public void setJourneyEndTime(double journeyEndTime) {
+		this.journeyEndTime = journeyEndTime;
+	}
+
+	public void setStartStation(String startStation) {
+		this.startStation = startStation;
+	}
+
+	public void setEndStation(String endStation) {
+		this.endStation = endStation;
+	}
+
+	public void setUpdatedZone(String updatedZone) {
+		this.updatedZone = updatedZone;
+	}
+
+	public void setUpdatedLength(String updatedLength) {
+		this.updatedLength = updatedLength;
+	}
+    
 }
 
 

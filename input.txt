@@ -11,4 +11,4 @@ ct:Charles:charles@rmit.edu.au::
 AllDay:Zone1:6.90
 AllDay:Zone12:9.80
 #stations
-Central,1:Flagstaff,1:Richmond,1:Lilydale,2:Epping,2:Lviv,1:Lviv,2
+Central,1:Flagstaff,1:Richmond,1:Lilydale,2:Epping,2:Lviv,1

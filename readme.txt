@@ -1,0 +1,1 @@
+java -cp JavaFX-0.0.1-SNAPSHOT.jar gui.Main input.txt output.txt

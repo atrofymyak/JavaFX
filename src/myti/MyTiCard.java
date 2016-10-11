@@ -1,6 +1,8 @@
 package myti;
 
 import java.util.ArrayList;
+
+import constants.StringConstants;
 /**
  * Created by Prashant on 06/09/16.
  */
@@ -150,5 +152,15 @@ public class MyTiCard {
 		this.credit = credit;
 	}
 
-
+	public String toString(){
+		String result = this.getCardId();
+		
+		if(!this.getUserId().isEmpty()){
+			result+=StringConstants.COLON + this.getUserId();
+		}
+				
+		result += StringConstants.COLON + this.getCredit();
+				
+		return result;		
+	}
 }

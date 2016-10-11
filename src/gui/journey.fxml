@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:controller="gui.FXMLExampleController"
+	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+	styleClass="root">
+	<padding>
+		<Insets top="-50" right="5" bottom="5" left="5" />
+	</padding>
+	
+	<VBox spacing="5">
+		<Button id="displayJourney" text="Display Journey" onAction="#displayJourneys" />
+		<ListView  id="journeys" prefHeight="100" fx:id="journeys" prefWidth="500" />		
+	</VBox>
+	
+	<HBox spacing="15" GridPane.rowIndex="1" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
+		<Button id="quit" text="QUIT" onAction="#quit" />
+		<Button id="save" text="SAVE" onAction="#saveData" />		
+		<Button id="manage" text="JOURNEYS/TRAVEL PASSES" onAction="#showJourneyWindow" />
+		<Button id="manageUsers" text="MANAGE CARDS/USERS" onAction="#openManageUserWindow" />		
+	</HBox>	
+	
+</GridPane>	

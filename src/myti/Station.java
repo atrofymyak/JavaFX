@@ -1,5 +1,7 @@
 package myti;
 
+import constants.StringConstants;
+
 public class Station {
 
 	private int type;
@@ -21,4 +23,9 @@ public class Station {
 		this.name = name;
 	}
 
+	public String toString(){
+		String result = this.getName() + StringConstants.COMMA + this.getType(); 				
+		return result;		
+	}
+	
 }

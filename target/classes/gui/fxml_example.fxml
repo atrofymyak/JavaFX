@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextArea?>
+
+<GridPane fx:controller="gui.FXMLExampleController"
+	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+	styleClass="root">
+	<padding>
+		<Insets top="-20" right="5" bottom="5" left="5" />
+	</padding>
+
+
+	<Label text="From" GridPane.columnIndex="0" GridPane.rowIndex="0"
+		GridPane.columnSpan="1" />
+
+	<ListView id="from" GridPane.rowIndex="1" prefHeight="60" fx:id="from" />
+
+	<Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="0"
+		GridPane.columnSpan="1" />
+
+	<ListView id="to" GridPane.rowIndex="1" GridPane.columnIndex="1"
+		prefHeight="60" fx:id="to" />
+
+	<Label text="Card" GridPane.columnIndex="2" GridPane.rowIndex="0"
+		GridPane.columnSpan="1" />
+
+	<ListView id="card" GridPane.rowIndex="1"
+		GridPane.columnIndex="2" prefHeight="60" fx:id="userCreditCard" />
+
+
+	<VBox spacing="5" alignment="CENTER" GridPane.columnIndex="3"
+		GridPane.rowIndex="0" prefHeight="90" GridPane.rowSpan="2">
+		<Label text="Pass Length" />
+
+		<ListView id="passLength" prefHeight="60" fx:id="passLength" />
+
+		<Label text="Pass Type" />
+
+		<ListView id="passType" prefHeight="60" fx:id="passType" />
+
+	</VBox>
+
+
+	<HBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="3"
+		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
+		<Label text="Day" />
+
+		<ListView id="day" prefHeight="25" prefWidth="70" fx:id="day" />
+	</HBox>
+
+
+	<HBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="3"
+		alignment="BOTTOM_RIGHT" GridPane.rowSpan="2">
+		<Label text="Start" />
+
+		<ListView id="start" prefHeight="25" prefWidth="70" editable="true" fx:id="start" />
+	</HBox>
+	
+	
+	<HBox spacing="15" GridPane.rowIndex="5" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
+		<Button id="addJourney" text="Add Journey" onAction="#addJourney" />
+		<TextArea id="journey" fx:id="journey" prefWidth="350" prefHeight="50" editable="false" />
+		<Button id="buyPass" text="Buy Pass" onAction="#buyPass" />
+	</HBox>
+
+	<HBox spacing="15" GridPane.rowIndex="6" alignment="BOTTOM_CENTER" GridPane.columnSpan="4">
+		<Button id="quit" text="QUIT" onAction="#quit" />
+		<Button id="save" text="SAVE" onAction="#saveData" />		
+		<Button id="manage" text="MANAGE CARDS/USERS" onAction="#openManageUserWindow" />
+		<Button id="printReports" text="PRINT REPORTS" onAction="#displayJourney" />		
+	</HBox>
+
+</GridPane>

@@ -3,6 +3,7 @@ package db;
 import java.util.ArrayList;
 import java.util.List;
 
+import myti.Journey;
 import myti.MyTiCard;
 import myti.MyTiPass;
 import myti.Station;
@@ -14,6 +15,7 @@ public class DBService {
 	private List<User> users = new ArrayList<User>();
 	private List<Station> stations = new ArrayList<Station>();
 	private List<MyTiPass> passes = new ArrayList<MyTiPass>();
+	private List<Journey> journeys = new ArrayList<Journey>();
 	
 	public static final DBService INSTANCE = new DBService();
 
@@ -71,5 +73,16 @@ public class DBService {
 	public void addPass(MyTiPass pass) {
 		this.passes.add(pass);
 	}
+
+	public List<Journey> getJourneys() {
+		return journeys;
+	}
+
+	public void setJourneys(List<Journey> journeys) {
+		this.journeys = journeys;
+	}
 	
+	public void addJourney(Journey journey) {
+		this.journeys.add(journey);
+	}
 }

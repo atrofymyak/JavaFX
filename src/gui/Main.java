@@ -1,4 +1,4 @@
-package com.tas;
+package gui;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,9 +22,13 @@ import myti.Station;
 public class Main extends Application {
 
 	private DBService dbService = DBService.getInstance();
+	private static File fileToWrite = null;
 
 	public static void main(String[] args) {
-		FileService.getInstance().readFile(new File("input.txt"));
+		FileService.getInstance().readFile(new File(args[0]));
+		fileToWrite = new File(args[1]);
+		
+		FileService.getInstance().setWriteFile(fileToWrite);
 
 		launch(args);
 	}
@@ -114,11 +118,11 @@ public class Main extends Application {
 		@SuppressWarnings("unchecked")
 		ListView<String> startListView = (ListView<String>) scene.lookup(StringConstants.START);
 		List<String> startItems = new ArrayList<String>();
-		startItems.add("0:00");
+		startItems.add("0.00");
 		startListView.setEditable(true);
 		startListView.setItems(new ObservableListWrapper<String>(startItems));
 
-		stage.setTitle("FXML Welcome");
+		stage.setTitle("GUI");
 		stage.setScene(scene);
 		stage.show();
 
